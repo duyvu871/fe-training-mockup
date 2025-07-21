@@ -10,6 +10,7 @@ const ENVPATHS = {
 } as const;
 
 console.log(`Loading environment variables from: ${ENVPATHS[process.env.NODE_ENV || 'development'] || ENVPATHS.development}`);
+console.log('NODE_ENV:', process.env.NODE_ENV);
 
 // Load environment variables
 const dotenvConf = dotenv.config({
