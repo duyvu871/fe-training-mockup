@@ -9,8 +9,10 @@ const ENVPATHS = {
     test: `.env.test`,
 } as const;
 
+console.log(`Loading environment variables from: ${ENVPATHS[process.env.NODE_ENV || 'development'] || ENVPATHS.development}`);
+
 // Load environment variables
-dotenv.config({
+const dotenvConf = dotenv.config({
     path: ENVPATHS[process.env.NODE_ENV || 'development'] || ENVPATHS.development,
 });
 
