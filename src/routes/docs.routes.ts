@@ -15,6 +15,8 @@ import { logger } from '../utils/logger';
 export function createDocsRoutes(): Router {
   const router = Router();
 
+  // Load swagger spec từ file JSON
+  const swaggerDocument = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs', 'swagger.json'), 'utf8'));
   // Swagger UI options
   const swaggerUIOptions = {
     explorer: true,
@@ -53,7 +55,11 @@ export function createDocsRoutes(): Router {
    *               type: string
    */
   router.use('/', swaggerUi.serve);
-  router.get('/', swaggerUi.setup(swaggerSpec, swaggerUIOptions));
+  if (process.env.NODE_ENV === 'production') {
+    router.get('/', swaggerUi.setup(swaggerDocument, swaggerUIOptions));
+  } else {
+    router.get('/', swaggerUi.setup(swaggerSpec, swaggerUIOptions));
+  }
 
   /**
    * @swagger
