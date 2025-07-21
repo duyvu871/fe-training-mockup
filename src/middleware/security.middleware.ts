@@ -10,6 +10,7 @@ import { logger } from '../utils/logger';
 import { HTTP_STATUS } from '../utils/constants';
 import { createErrorResponse } from '../utils/helpers';
 import { AppError, ValidationError } from '../utils/errors';
+import { config } from '@/config';
 
 /**
  * Security headers middleware using Helmet
@@ -39,7 +40,7 @@ export const corsConfig = cors({
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
-    const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [
+    const allowedOrigins = config.cors.origin || [
       'http://localhost:3000',
       'http://localhost:3001',
       'http://localhost:5173', // Vite dev server
