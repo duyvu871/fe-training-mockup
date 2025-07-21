@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "tsup --watch --onSuccess \"npm run start\"",
         "build": "tsup && tsc-alias",
-        "build:prod": "rimraf dist && tsup --minify && tsc-alias && npm run tailwind:build",
+        "build:prod": "rimraf dist && tsup && tsc-alias && npm run tailwind:build",
         "start": "node dist/src/server.js",
         "start:prod": "NODE_ENV=production node dist/src/server.js",
         "setup": "npm run docker:up && timeout 30 && npm run db:setup",
