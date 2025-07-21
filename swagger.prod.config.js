@@ -16,7 +16,7 @@ const options = {
     },
     servers: [
       {
-        url: 'fe-api.training.ssit.company', // Thay bằng domain của bạn
+        url: 'fe-api-training.ssit.company', // Thay bằng domain của bạn
         description: 'Server testing',
       },
     ],

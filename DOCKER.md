@@ -64,7 +64,7 @@ npm run docker:training:down
 - ✅ PostgreSQL với training data
 - ✅ Redis cache
 - ✅ POS API optimized cho training
-- ✅ CORS configured cho fe-api.training.ssit.company
+- ✅ CORS configured cho fe-api-training.ssit.company
 - ✅ Training-specific environment variables
 - ✅ Health checks và monitoring
 
