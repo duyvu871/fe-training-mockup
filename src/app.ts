@@ -30,6 +30,7 @@ const app = express();
 if (config.app.env === 'development') {
   app.use(requestLogger);
 }
+app.set('trust proxy', 1); // Trust first proxy for secure headers
 
 // Security headers
 app.use(securityHeaders);
