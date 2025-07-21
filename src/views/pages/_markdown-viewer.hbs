@@ -1,0 +1,203 @@
+{{#> layouts/main title=title hideNav=true }}
+
+<!-- Include GitHub Markdown CSS -->
+
+<link rel="stylesheet" href="/css/markdown.css">
+
+<div class="flex min-h-screen bg-gray-900 text-gray-100 -m-5">
+  <!-- Sidebar Navigation -->
+  <div class="w-70 bg-gray-800 border-r border-gray-700 flex flex-col fixed h-screen overflow-y-auto z-10 markdown-sidebar">
+    <!-- Sidebar Header -->
+    <div class="p-5 border-b border-gray-700 bg-gray-900">
+      <h3 class="text-lg font-semibold text-blue-400 mb-1">📚 Tài liệu API</h3>
+      <p class="text-sm text-gray-400 m-0">Chọn module để xem</p>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="flex-1 py-4">
+      <ul class="list-none m-0 p-0">
+        {{#each modules}}
+        <li class="mx-2 my-1">
+          <a href="/docs/markdown/{{name}}" 
+             class="flex items-center px-4 py-3 text-sm text-gray-100 no-underline rounded-md transition-all duration-200 hover:bg-gray-700 hover:text-blue-400 {{#if active}}bg-blue-600 text-white font-medium{{/if}}">
+            <span class="flex-1">{{title}}</span>
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="border-t border-gray-700 p-4 bg-gray-900">
+      <div class="flex flex-col gap-2">
+        <a href="/docs" class="flex items-center px-3 py-2 text-xs text-gray-400 no-underline rounded transition-all duration-200 hover:bg-gray-700 hover:text-blue-400">
+          <span class="mr-2">🔄</span> Swagger UI
+        </a>
+        <a href="/docs/api" class="flex items-center px-3 py-2 text-xs text-gray-400 no-underline rounded transition-all duration-200 hover:bg-gray-700 hover:text-blue-400">
+          <span class="mr-2">🌐</span> HTML Docs
+        </a>
+        <a href="/docs/json" class="flex items-center px-3 py-2 text-xs text-gray-400 no-underline rounded transition-all duration-200 hover:bg-gray-700 hover:text-blue-400">
+          <span class="mr-2">📄</span> OpenAPI JSON
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 ml-70 p-5 max-w-full">
+    {{#if markdownContent}}
+    <!-- Quick Actions Bar -->
+    <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-5 flex justify-between items-center flex-wrap gap-4">
+      <div class="flex items-center gap-4 flex-wrap">
+        <span class="text-sm font-semibold text-gray-100">📄 {{fileName}}</span>
+        <span class="text-xs text-gray-400 bg-gray-700 px-2 py-1 rounded">{{fileSize}} chars</span>
+      </div>
+      
+      <div class="flex gap-2 flex-wrap">
+        <button onclick="copyMarkdown()" class="inline-flex items-center px-3 py-1.5 text-xs font-medium bg-gray-700 text-gray-100 border border-gray-600 rounded hover:bg-gray-600 hover:border-gray-500 transition-all duration-200">
+          <span class="mr-1">📋</span> Copy MD
+        </button>
+        <button onclick="copyHTML()" class="inline-flex items-center px-3 py-1.5 text-xs font-medium bg-gray-700 text-gray-100 border border-gray-600 rounded hover:bg-gray-600 hover:border-gray-500 transition-all duration-200">
+          <span class="mr-1">📄</span> Copy HTML
+        </button>
+        <a href="/docs/api/{{moduleName}}?format=markdown" 
+           class="inline-flex items-center px-3 py-1.5 text-xs font-medium bg-gray-700 text-gray-100 border border-gray-600 rounded hover:bg-gray-600 hover:border-gray-500 transition-all duration-200 no-underline"
+           download="{{fileName}}">
+          <span class="mr-1">💾</span> Download
+        </a>
+        <button onclick="toggleView()" id="view-toggle" class="inline-flex items-center px-3 py-1.5 text-xs font-medium bg-green-600 text-white border border-green-600 rounded hover:bg-green-700 hover:border-green-700 transition-all duration-200">
+          <span class="mr-1">📝</span> <span id="toggle-text">Raw</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Markdown Content -->
+    <div class="bg-gray-900 border border-gray-700 rounded-lg overflow-hidden">
+      <!-- Rendered HTML (default view) -->
+      <div id="html-content" class="markdown-body-dark transition-opacity duration-300" style="max-width: none;">
+        {{{htmlContent}}}
+      </div>
+      
+      <!-- Raw Markdown (hidden by default) -->
+      <pre id="markdown-raw" class="hidden m-0 p-6 bg-gray-900 text-gray-100 font-mono text-sm leading-relaxed overflow-x-auto max-h-screen overflow-y-auto whitespace-pre-wrap break-words markdown-scrollbar transition-opacity duration-300">{{markdownContent}}</pre>
+    </div>
+    {{else}}
+    <!-- Empty State -->
+    <div class="bg-gray-800 border border-gray-700 rounded-lg p-15 text-center">
+      <div class="text-5xl mb-5 opacity-60">📄</div>
+      <h2 class="text-xl font-medium text-gray-100 mb-2">Chọn tài liệu để xem</h2>
+      <p class="text-gray-400 mb-8">Chọn một module từ sidebar để xem nội dung markdown tương ứng.</p>
+      
+      <div class="text-left">
+        <h3 class="text-lg font-medium text-gray-100 mb-5">Modules có sẵn:</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+          {{#each modules}}
+          <a href="/docs/markdown/{{this.name}}" class="flex flex-col items-center p-5 bg-gray-800 border border-gray-700 rounded-lg no-underline text-gray-100 transition-all duration-200 hover:bg-gray-700 hover:border-blue-400 hover:text-blue-400 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-400/15">
+            <div class="text-2xl mb-2">
+              {{#eq this.name "auth"}}🔐{{/eq}}
+              {{#eq this.name "order"}}📋{{/eq}}
+              {{#eq this.name "product"}}📦{{/eq}}
+              {{#eq this.name "stock"}}📊{{/eq}}
+              {{#eq this.name "category"}}🏷️{{/eq}}
+              {{#eq this.name "user"}}👤{{/eq}}
+              {{#eq this.name "dashboard"}}📈{{/eq}}
+            </div>
+            <div class="font-medium text-center">{{this.title}}</div>
+          </a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</div>
+
+
+<script>
+let isRawView = false;
+
+function toggleView() {
+  const htmlContent = document.getElementById('html-content');
+  const markdownRaw = document.getElementById('markdown-raw');
+  const toggleText = document.getElementById('toggle-text');
+  const toggleBtn = document.getElementById('view-toggle');
+  
+  if (isRawView) {
+    // Switch to HTML view
+    htmlContent.classList.remove('hidden');
+    markdownRaw.classList.add('hidden');
+    toggleText.textContent = 'Raw';
+    toggleBtn.querySelector('span').textContent = '📝';
+    isRawView = false;
+  } else {
+    // Switch to raw view
+    htmlContent.classList.add('hidden');
+    markdownRaw.classList.remove('hidden');
+    toggleText.textContent = 'HTML';
+    toggleBtn.querySelector('span').textContent = '🌐';
+    isRawView = true;
+  }
+}
+
+function copyMarkdown() {
+  const content = document.getElementById('markdown-raw').textContent;
+  copyToClipboard(content, 'Markdown copied to clipboard!');
+}
+
+function copyHTML() {
+  const content = document.getElementById('html-content').innerHTML;
+  copyToClipboard(content, 'HTML copied to clipboard!');
+}
+
+function copyToClipboard(content, message) {
+  navigator.clipboard.writeText(content).then(() => {
+    showNotification(message, 'success');
+  }).catch(err => {
+    console.error('Failed to copy:', err);
+    showNotification('Failed to copy to clipboard', 'error');
+  });
+}
+
+function showNotification(message, type = 'success') {
+  const notification = document.createElement('div');
+  const bgColor = type === 'success' ? '#059669' : '#dc2626';
+  const icon = type === 'success' ? '✅' : '❌';
+  
+  notification.style.cssText = `
+    position: fixed; 
+    top: 20px; 
+    right: 20px; 
+    background: ${bgColor}; 
+    color: white; 
+    padding: 12px 20px; 
+    border-radius: 6px; 
+    z-index: 1000; 
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    border: 1px solid rgba(255,255,255,0.1);
+  `;
+  notification.textContent = `${icon} ${message}`;
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    if (document.body.contains(notification)) {
+      document.body.removeChild(notification);
+    }
+  }, 3000);
+}
+
+// Highlight active module in sidebar based on current URL
+document.addEventListener('DOMContentLoaded', function() {
+  const currentPath = window.location.pathname;
+  const moduleLinks = document.querySelectorAll('.markdown-sidebar a[href^="/docs/markdown/"]');
+  
+  moduleLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPath) {
+      link.classList.add('bg-blue-600', 'text-white', 'font-medium');
+      link.classList.remove('hover:bg-gray-700', 'hover:text-blue-400');
+    }
+  });
+});
+</script>
+
+{{/layouts/main}}

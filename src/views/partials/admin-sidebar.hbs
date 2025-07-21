@@ -1,0 +1,66 @@
+<!-- Admin Sidebar -->
+<nav class="h-full bg-white shadow-sm w-64 left-0 top-16 bottom-0 overflow-y-auto border-r border-gray-200 z-30 " id="sidebar">
+    <div class="p-4 space-y-2">
+        <!-- Dashboard -->
+        <a href="/dashboard" class="nav-link flex items-center p-3 text-sm font-medium rounded-lg {{#if (eq currentPage 'dashboard')}}bg-primary-50 text-primary-700 border-r-2 border-primary-600{{else}}text-gray-600 hover:bg-gray-50{{/if}}">
+            <i class="fas fa-tachometer-alt mr-3 {{#if (eq currentPage 'dashboard')}}text-primary-600{{else}}text-gray-400{{/if}}"></i>
+            Bảng điều khiển
+        </a>
+
+        <!-- POS -->
+        <a href="/pos" class="nav-link flex items-center p-3 text-sm font-medium rounded-lg {{#if (eq currentPage 'pos')}}bg-primary-50 text-primary-700 border-r-2 border-primary-600{{else}}text-gray-600 hover:bg-gray-50{{/if}}">
+            <i class="fas fa-cash-register mr-3 {{#if (eq currentPage 'pos')}}text-primary-600{{else}}text-gray-400{{/if}}"></i>
+            Bán hàng (POS)
+        </a>
+
+        <!-- Products -->
+        <a href="/products" class="nav-link flex items-center p-3 text-sm font-medium rounded-lg {{#if (eq currentPage 'products')}}bg-primary-50 text-primary-700 border-r-2 border-primary-600{{else}}text-gray-600 hover:bg-gray-50{{/if}}">
+            <i class="fas fa-box mr-3 {{#if (eq currentPage 'products')}}text-primary-600{{else}}text-gray-400{{/if}}"></i>
+            Sản phẩm
+        </a>
+
+        <!-- Orders -->
+        <a href="/orders" class="nav-link flex items-center p-3 text-sm font-medium rounded-lg {{#if (eq currentPage 'orders')}}bg-primary-50 text-primary-700 border-r-2 border-primary-600{{else}}text-gray-600 hover:bg-gray-50{{/if}}">
+            <i class="fas fa-shopping-cart mr-3 {{#if (eq currentPage 'orders')}}text-primary-600{{else}}text-gray-400{{/if}}"></i>
+            Đơn hàng
+        </a>
+
+        <!-- Stock -->
+        <a href="/stock" class="nav-link flex items-center p-3 text-sm font-medium rounded-lg {{#if (eq currentPage 'stock')}}bg-primary-50 text-primary-700 border-r-2 border-primary-600{{else}}text-gray-600 hover:bg-gray-50{{/if}}">
+            <i class="fas fa-warehouse mr-3 {{#if (eq currentPage 'stock')}}text-primary-600{{else}}text-gray-400{{/if}}"></i>
+            Kho hàng
+        </a>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-200 my-4"></div>
+
+        <!-- Users -->
+        <a href="/users" class="nav-link flex items-center p-3 text-sm font-medium rounded-lg {{#if (eq currentPage 'users')}}bg-primary-50 text-primary-700 border-r-2 border-primary-600{{else}}text-gray-600 hover:bg-gray-50{{/if}}">
+            <i class="fas fa-users mr-3 {{#if (eq currentPage 'users')}}text-primary-600{{else}}text-gray-400{{/if}}"></i>
+            Người dùng
+        </a>
+
+        <!-- Reports -->
+        <a href="/reports" class="nav-link flex items-center p-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50">
+            <i class="fas fa-chart-bar mr-3 text-gray-400"></i>
+            Báo cáo
+        </a>
+
+        <!-- Settings -->
+        <a href="/settings" class="nav-link flex items-center p-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50">
+            <i class="fas fa-cog mr-3 text-gray-400"></i>
+            Cài đặt
+        </a>
+    </div>
+
+    <!-- Bottom info -->
+    <div class=" bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-gray-50">
+        <div class="text-xs text-gray-500 text-center">
+            <p>POS System v1.0</p>
+            <p>Environment: {{environment}}</p>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile sidebar overlay -->
+<div class="fixed inset-0 bg-gray-600 bg-opacity-75 z-20 md:hidden" id="sidebar-overlay" style="display: none;"></div>

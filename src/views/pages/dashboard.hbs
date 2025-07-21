@@ -1,0 +1,222 @@
+<!-- Dashboard Page -->
+<div class="space-y-6">
+    <!-- Page Header -->
+    <div class="sm:flex sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900">Bảng điều khiển</h1>
+            <p class="mt-2 text-sm text-gray-600">Tổng quan hoạt động của cửa hàng</p>
+        </div>
+        <div class="mt-4 sm:mt-0">
+            <span class="text-sm text-gray-500">Cập nhật lúc: <span id="last-updated"></span></span>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Revenue Today -->
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="p-5">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-500 rounded-md flex items-center justify-center">
+                            <i class="fas fa-dollar-sign text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Doanh thu hôm nay</dt>
+                            <dd class="text-lg font-medium text-gray-900" id="today-revenue">0₫</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-5 py-3">
+                <div class="text-sm">
+                    <span class="text-green-600 font-medium" id="revenue-change">+0%</span>
+                    <span class="text-gray-500">so với hôm qua</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders Today -->
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="p-5">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-blue-500 rounded-md flex items-center justify-center">
+                            <i class="fas fa-shopping-cart text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Đơn hàng hôm nay</dt>
+                            <dd class="text-lg font-medium text-gray-900" id="today-orders">0</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-5 py-3">
+                <div class="text-sm">
+                    <span class="text-blue-600 font-medium" id="orders-change">+0%</span>
+                    <span class="text-gray-500">so với hôm qua</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products -->
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="p-5">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-500 rounded-md flex items-center justify-center">
+                            <i class="fas fa-box text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Tổng sản phẩm</dt>
+                            <dd class="text-lg font-medium text-gray-900" id="total-products">0</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-5 py-3">
+                <div class="text-sm">
+                    <span class="text-orange-600 font-medium" id="low-stock-count">0</span>
+                    <span class="text-gray-500">sắp hết hàng</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users -->
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="p-5">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-indigo-500 rounded-md flex items-center justify-center">
+                            <i class="fas fa-users text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="ml-5 w-0 flex-1">
+                        <dl>
+                            <dt class="text-sm font-medium text-gray-500 truncate">Người dùng</dt>
+                            <dd class="text-lg font-medium text-gray-900" id="total-users">0</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-5 py-3">
+                <div class="text-sm">
+                    <span class="text-green-600 font-medium" id="active-users">0</span>
+                    <span class="text-gray-500">đang hoạt động</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <!-- Revenue Chart -->
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="px-4 py-5 sm:p-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Doanh thu 7 ngày gần đây</h3>
+                <div class="h-64" id="revenue-chart">
+                    <div class="flex items-center justify-center h-full text-gray-500">
+                        <div class="text-center">
+                            <i class="fas fa-chart-line text-4xl mb-2"></i>
+                            <p>Biểu đồ doanh thu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Products -->
+        <div class="bg-white overflow-hidden shadow rounded-lg">
+            <div class="px-4 py-5 sm:p-6">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Sản phẩm bán chạy</h3>
+                <div class="space-y-3" id="top-products">
+                    <div class="flex items-center justify-center h-64 text-gray-500">
+                        <div class="text-center">
+                            <i class="fas fa-box-open text-4xl mb-2"></i>
+                            <p>Đang tải dữ liệu...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="bg-white shadow overflow-hidden sm:rounded-md">
+        <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Đơn hàng gần đây</h3>
+                <a href="/orders" class="text-sm font-medium text-primary-600 hover:text-primary-500">
+                    Xem tất cả
+                </a>
+            </div>
+        </div>
+        <div class="bg-white">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Mã đơn hàng
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Khách hàng
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Tổng tiền
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Trạng thái
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Thời gian
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="recent-orders">
+                        <tr>
+                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+                                Đang tải dữ liệu...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="bg-white overflow-hidden shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Thao tác nhanh</h3>
+            <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                <a href="/pos" class="flex flex-col items-center p-4 bg-primary-50 rounded-lg hover:bg-primary-100 transition-colors">
+                    <i class="fas fa-cash-register text-2xl text-primary-600 mb-2"></i>
+                    <span class="text-sm font-medium text-primary-900">Bán hàng</span>
+                </a>
+                
+                <a href="/products" class="flex flex-col items-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
+                    <i class="fas fa-plus text-2xl text-green-600 mb-2"></i>
+                    <span class="text-sm font-medium text-green-900">Thêm sản phẩm</span>
+                </a>
+                
+                <a href="/stock" class="flex flex-col items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
+                    <i class="fas fa-warehouse text-2xl text-orange-600 mb-2"></i>
+                    <span class="text-sm font-medium text-orange-900">Quản lý kho</span>
+                </a>
+                
+                <a href="/reports" class="flex flex-col items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
+                    <i class="fas fa-chart-bar text-2xl text-purple-600 mb-2"></i>
+                    <span class="text-sm font-medium text-purple-900">Báo cáo</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

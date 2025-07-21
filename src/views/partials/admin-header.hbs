@@ -1,0 +1,77 @@
+<!-- Admin Header -->
+<header class="bg-white shadow-sm border-b border-gray-200">
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <!-- Left side -->
+            <div class="flex items-center">
+                <button type="button" id="mobile-menu-button" class="md:hidden -ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 transition-colors">
+                    <span class="sr-only">Mở menu</span>
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+                
+                <div class="flex items-center ml-2 md:ml-0">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-cash-register text-2xl text-primary-600"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-lg md:text-xl font-semibold text-gray-900">POS System</h1>
+                        <p class="text-xs md:text-sm text-gray-500 hidden sm:block">Quản lý cửa hàng</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="flex items-center space-x-2 md:space-x-4">
+                <!-- Notifications -->
+                <button type="button" class="p-2 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg transition-colors relative">
+                    <span class="sr-only">Thông báo</span>
+                    <i class="fas fa-bell text-lg"></i>
+                    <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                </button>
+
+                <!-- User menu -->
+                <div class="relative" id="user-menu">
+                    <button type="button" class="flex items-center p-2 text-sm rounded-lg text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors" id="user-menu-button">
+                        <span class="sr-only">Mở menu người dùng</span>
+                        <div class="flex items-center space-x-2 md:space-x-3">
+                            <div class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-white text-sm"></i>
+                            </div>
+                            <div class="hidden md:block text-left">
+                                <p class="text-sm font-medium text-gray-900" id="user-name">Admin User</p>
+                                <p class="text-xs text-gray-500" id="user-role">Administrator</p>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs text-gray-400 hidden md:block"></i>
+                        </div>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    <div class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" id="user-menu-dropdown">
+                        <div class="py-1">
+                            <a href="/dashboard" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-tachometer-alt mr-3 text-gray-400"></i>
+                                Bảng điều khiển
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-user mr-3 text-gray-400"></i>
+                                Hồ sơ cá nhân
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-cog mr-3 text-gray-400"></i>
+                                Cài đặt
+                            </a>
+                            <div class="border-t border-gray-100"></div>
+                            <button type="button" id="logout-button" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-sign-out-alt mr-3 text-gray-400"></i>
+                                Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

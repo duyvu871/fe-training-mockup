@@ -1,0 +1,337 @@
+<!-- POS (Point of Sale) Page -->
+<div class="h-full flex overflow-hidden">
+    <!-- Product Selection Panel -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+        <!-- Search Bar -->
+        <div class="bg-white border-b border-gray-200 p-4">
+            <div class="flex space-x-4">
+                <div class="flex-1">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search h-5 w-5 text-gray-400"></i>
+                        </div>
+                        <input type="text" id="product-search" placeholder="Tìm sản phẩm (tên, SKU, barcode)..." 
+                               class="focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md">
+                    </div>
+                </div>
+                <div class="w-48">
+                    <select id="category-filter" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md">
+                        <option value="">Tất cả danh mục</option>
+                    </select>
+                </div>
+                <button id="barcode-scan-btn" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <i class="fas fa-barcode mr-2"></i>
+                    Quét mã
+                </button>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="flex-1 overflow-y-auto p-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" id="products-grid">
+                <!-- Loading State -->
+                <div class="col-span-full flex items-center justify-center py-12">
+                    <div class="text-center">
+                        <i class="fas fa-spinner fa-spin text-3xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-500">Đang tải sản phẩm...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-gray-50 border-t border-gray-200 p-4">
+            <div class="flex space-x-2">
+                <button id="add-custom-item-btn" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <i class="fas fa-plus mr-2"></i>
+                    Thêm item tùy chỉnh
+                </button>
+                <button id="apply-discount-btn" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <i class="fas fa-percent mr-2"></i>
+                    Giảm giá
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart & Checkout Panel -->
+    <div class="w-96 bg-white border-l border-gray-200 flex flex-col">
+        <!-- Cart Header -->
+        <div class="bg-primary-600 text-white p-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-semibold">Giỏ hàng</h2>
+                <button id="clear-cart-btn" class="text-primary-200 hover:text-white">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <div class="mt-2 text-sm text-primary-200">
+                <span id="cart-items-count">0</span> sản phẩm
+            </div>
+        </div>
+
+        <!-- Cart Items -->
+        <div class="flex-1 overflow-y-auto">
+            <div id="cart-items" class="divide-y divide-gray-200">
+                <!-- Empty State -->
+                <div id="empty-cart" class="p-8 text-center text-gray-500">
+                    <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                    <p>Giỏ hàng trống</p>
+                    <p class="text-sm">Thêm sản phẩm để bắt đầu</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Info -->
+        <div class="border-t border-gray-200 p-4">
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Khách hàng</label>
+                    <input type="text" id="customer-name" placeholder="Để trống = Khách lẻ" 
+                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm text-sm focus:ring-primary-500 focus:border-primary-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Số điện thoại</label>
+                    <input type="tel" id="customer-phone" placeholder="Số điện thoại (tùy chọn)" 
+                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm text-sm focus:ring-primary-500 focus:border-primary-500">
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="border-t border-gray-200 p-4 space-y-3">
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Tạm tính:</span>
+                <span id="subtotal">0₫</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Giảm giá:</span>
+                <span id="discount" class="text-red-600">0₫</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Thuế (10%):</span>
+                <span id="tax">0₫</span>
+            </div>
+            <div class="border-t border-gray-200 pt-3">
+                <div class="flex justify-between text-lg font-semibold">
+                    <span>Tổng cộng:</span>
+                    <span id="total" class="text-primary-600">0₫</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="border-t border-gray-200 p-4">
+            <div class="space-y-3">
+                <label class="block text-sm font-medium text-gray-700">Phương thức thanh toán</label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button type="button" class="payment-method-btn active" data-method="CASH">
+                        <i class="fas fa-money-bill-wave mr-2"></i>
+                        Tiền mặt
+                    </button>
+                    <button type="button" class="payment-method-btn" data-method="CARD">
+                        <i class="fas fa-credit-card mr-2"></i>
+                        Thẻ
+                    </button>
+                    <button type="button" class="payment-method-btn" data-method="BANK_TRANSFER">
+                        <i class="fas fa-university mr-2"></i>
+                        Chuyển khoản
+                    </button>
+                    <button type="button" class="payment-method-btn" data-method="E_WALLET">
+                        <i class="fas fa-mobile-alt mr-2"></i>
+                        Ví điện tử
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkout Buttons -->
+        <div class="border-t border-gray-200 p-4 space-y-2">
+            <button id="checkout-btn" disabled class="w-full inline-flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:bg-gray-300 disabled:cursor-not-allowed">
+                <i class="fas fa-cash-register mr-2"></i>
+                Thanh toán
+            </button>
+            <div class="grid grid-cols-2 gap-2">
+                <button id="save-order-btn" class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <i class="fas fa-save mr-2"></i>
+                    Lưu đơn
+                </button>
+                <button id="print-receipt-btn" class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <i class="fas fa-print mr-2"></i>
+                    In hóa đơn
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Item Modal -->
+<div id="custom-item-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Thêm item tùy chỉnh</h3>
+            <form id="custom-item-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Tên sản phẩm</label>
+                    <input type="text" id="custom-item-name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Giá</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="custom-item-price" min="0" step="1000" required class="block w-full pr-12 border-gray-300 rounded-md shadow-sm text-sm">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">₫</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Số lượng</label>
+                    <input type="number" id="custom-item-quantity" min="1" value="1" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div class="flex justify-end space-x-3 pt-4">
+                    <button type="button" id="cancel-custom-item-btn" class="px-4 py-2 text-sm text-gray-500 hover:text-gray-700">Hủy</button>
+                    <button type="submit" class="px-4 py-2 bg-primary-600 text-white text-sm rounded-md hover:bg-primary-700">Thêm vào giỏ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Discount Modal -->
+<div id="discount-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Áp dụng giảm giá</h3>
+            <form id="discount-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Loại giảm giá</label>
+                    <select id="discount-type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="amount">Giảm theo số tiền</option>
+                        <option value="percentage">Giảm theo phần trăm</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Giá trị</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <input type="number" id="discount-value" min="0" step="1000" required class="block w-full pr-12 border-gray-300 rounded-md shadow-sm text-sm">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <span id="discount-unit" class="text-gray-500 sm:text-sm">₫</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3 pt-4">
+                    <button type="button" id="cancel-discount-btn" class="px-4 py-2 text-sm text-gray-500 hover:text-gray-700">Hủy</button>
+                    <button type="submit" class="px-4 py-2 bg-primary-600 text-white text-sm rounded-md hover:bg-primary-700">Áp dụng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Confirmation Modal -->
+<div id="payment-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+    <div class="relative top-10 mx-auto p-5 border max-w-md shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                    <i class="fas fa-check text-green-600 text-xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Đơn hàng đã được tạo!</h3>
+                <p class="text-sm text-gray-500 mb-2">Đơn hàng <span id="order-number"></span></p>
+                <div class="mb-4">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" id="order-status-badge">
+                        <i class="fas fa-clock mr-1"></i>
+                        Chờ thanh toán
+                    </span>
+                </div>
+                
+                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                    <div class="text-2xl font-bold text-primary-600" id="payment-total">0₫</div>
+                    <div class="text-sm text-gray-500">Phương thức: <span id="payment-method-text">Tiền mặt</span></div>
+                </div>
+
+                <div class="space-y-3" id="payment-actions">
+                    <!-- Initial state: Order created, waiting for payment confirmation -->
+                    <div id="pending-payment-actions">
+                        <button id="confirm-payment-btn" class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Xác nhận thanh toán
+                        </button>
+                        <button id="print-receipt-btn" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                            <i class="fas fa-print mr-2"></i>
+                            In hóa đơn
+                        </button>
+                    </div>
+                    
+                    <!-- After payment confirmed -->
+                    <div id="completed-payment-actions" style="display: none;">
+                        <button id="print-receipt-final-btn" class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700">
+                            <i class="fas fa-print mr-2"></i>
+                            In hóa đơn
+                        </button>
+                    </div>
+                    
+                    <!-- Common actions -->
+                    <button id="new-order-btn" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        <i class="fas fa-plus mr-2"></i>
+                        Đơn hàng mới
+                    </button>
+                    <button id="view-order-btn" class="w-full text-sm text-primary-600 hover:text-primary-500">
+                        Xem chi tiết đơn hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Custom POS Styles */
+.payment-method-btn {
+    @apply flex items-center justify-center px-3 py-2 text-xs font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+}
+
+.payment-method-btn.active {
+    @apply bg-primary-600 text-white border-primary-600;
+}
+
+.product-card {
+    @apply bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer;
+}
+
+.product-card:hover {
+    @apply border-primary-300;
+}
+
+.product-card.out-of-stock {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+.cart-item {
+    @apply p-4 hover:bg-gray-50;
+}
+
+.quantity-btn {
+    @apply w-8 h-8 flex items-center justify-center text-sm font-medium border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+}
+
+.quantity-input {
+    @apply w-16 text-center border-t border-b border-gray-300 text-sm;
+}
+
+/* Order Status Badges */
+.status-pending {
+    @apply bg-yellow-100 text-yellow-800;
+}
+
+.status-processing {
+    @apply bg-blue-100 text-blue-800;
+}
+
+.status-completed {
+    @apply bg-green-100 text-green-800;
+}
+
+.status-cancelled {
+    @apply bg-red-100 text-red-800;
+}
+</style>

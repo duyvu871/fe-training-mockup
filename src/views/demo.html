@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS API - Demo</title>
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+<body>
+    <div class="min-h-screen bg-gray-50">
+        <!-- Header -->
+        <header class="bg-white shadow-soft">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-4">
+                    <div class="flex items-center">
+                        <h1 class="text-2xl font-bold text-primary-600">POS API</h1>
+                    </div>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#" class="text-gray-700 hover:text-primary-600">Dashboard</a>
+                        <a href="#" class="text-gray-700 hover:text-primary-600">Sản phẩm</a>
+                        <a href="#" class="text-gray-700 hover:text-primary-600">Đơn hàng</a>
+                        <a href="#" class="text-gray-700 hover:text-primary-600">Báo cáo</a>
+                    </nav>
+                    <div class="flex items-center space-x-4">
+                        <button class="btn-primary">Đăng xuất</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Dashboard Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-primary-100 text-primary-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Doanh thu hôm nay</h3>
+                                <p class="text-2xl font-bold text-primary-600">₫2,450,000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-success-100 text-success-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Đơn hàng</h3>
+                                <p class="text-2xl font-bold text-success-600">156</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-warning-100 text-warning-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Sản phẩm</h3>
+                                <p class="text-2xl font-bold text-warning-600">1,234</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-error-100 text-error-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Khách hàng</h3>
+                                <p class="text-2xl font-bold text-error-600">8,945</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-semibold text-gray-900">Đơn hàng gần đây</h2>
+                </div>
+                <div class="card-body p-0">
+                    <div class="overflow-x-auto">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn hàng</th>
+                                    <th>Khách hàng</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thời gian</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-mono">#ORD-001</td>
+                                    <td>Nguyễn Văn A</td>
+                                    <td>3 sản phẩm</td>
+                                    <td class="font-semibold">₫450,000</td>
+                                    <td><span class="badge-success">Hoàn thành</span></td>
+                                    <td>5 phút trước</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-mono">#ORD-002</td>
+                                    <td>Trần Thị B</td>
+                                    <td>1 sản phẩm</td>
+                                    <td class="font-semibold">₫120,000</td>
+                                    <td><span class="badge-warning">Đang xử lý</span></td>
+                                    <td>12 phút trước</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-mono">#ORD-003</td>
+                                    <td>Lê Văn C</td>
+                                    <td>5 sản phẩm</td>
+                                    <td class="font-semibold">₫780,000</td>
+                                    <td><span class="badge-success">Hoàn thành</span></td>
+                                    <td>25 phút trước</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="mt-8">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">Thao tác nhanh</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button class="btn-primary p-6 text-left">
+                        <div class="flex items-center">
+                            <svg class="w-8 h-8 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-semibold">Tạo đơn hàng mới</h3>
+                                <p class="text-sm opacity-90">Tạo đơn hàng cho khách hàng</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button class="btn-secondary p-6 text-left">
+                        <div class="flex items-center">
+                            <svg class="w-8 h-8 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-semibold">Thêm sản phẩm</h3>
+                                <p class="text-sm opacity-90">Thêm sản phẩm mới vào kho</p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button class="btn-success p-6 text-left">
+                        <div class="flex items-center">
+                            <svg class="w-8 h-8 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-semibold">Xem báo cáo</h3>
+                                <p class="text-sm opacity-90">Xem báo cáo doanh thu</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
