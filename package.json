@@ -10,7 +10,7 @@
         "start": " node dist/src/server.js",
         "start:prod": "NODE_ENV=production node dist/src/server.js",
         "setup": "npm run docker:up && timeout 30 && npm run db:setup",
-        "db:setup:prod": "npx dotenv -e .env.prod -- \"npm run db:generate && npm run db:migrate && npm run db:seed\"",
+        "db:setup:prod": "dotenv -e .env.prod -- \"npm run db:generate && npm run db:migrate && npm run db:seed\"",
         "db:setup": "npm run db:generate && npm run db:migrate && npm run db:seed",
         "db:generate": "prisma generate",
         "db:migrate": "prisma migrate dev",
