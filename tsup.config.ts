@@ -44,9 +44,6 @@ export default defineConfig(async (options: Options) => ({
     'swagger-ui-express',
     '*.hbs'
   ],
-  env: {
-    NODE_ENV: process.env.NODE_ENV || 'development'
-  },
   tsconfig: "./tsconfig.json",
   onSuccess: async () => {
     // // Copy handlebars templates

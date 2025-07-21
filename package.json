@@ -7,7 +7,7 @@
         "dev": "tsup --watch --onSuccess \"npm run start\"",
         "build": "tsup && tsc-alias",
         "build:prod": "rimraf dist && tsup && tsc-alias && npm run tailwind:build",
-        "start": "node dist/src/server.js",
+        "start": " node dist/src/server.js",
         "start:prod": "NODE_ENV=production node dist/src/server.js",
         "setup": "npm run docker:up && timeout 30 && npm run db:setup",
         "db:setup": "npm run db:generate && npm run db:migrate && npm run db:seed",
@@ -65,6 +65,7 @@
         "chalk": "^5.3.0",
         "compression": "^1.7.4",
         "cors": "^2.8.5",
+        "cross-env": "^7.0.3",
         "dayjs": "^1.11.13",
         "dotenv": "^16.3.1",
         "express": "^4.19.2",
@@ -87,7 +88,6 @@
         "zod": "^3.22.4"
     },
     "devDependencies": {
-        "@types/marked": "^5.0.2",
         "@types/bcryptjs": "^2.4.6",
         "@types/compression": "^1.7.5",
         "@types/cors": "^2.8.17",
@@ -95,6 +95,7 @@
         "@types/express-handlebars": "^6.0.0",
         "@types/js-yaml": "^4.0.9",
         "@types/jsonwebtoken": "^9.0.5",
+        "@types/marked": "^5.0.2",
         "@types/morgan": "^1.9.9",
         "@types/multer": "^1.4.11",
         "@types/node": "^20.10.4",
