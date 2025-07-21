@@ -49,13 +49,13 @@ export default defineConfig(async (options: Options) => ({
   },
   tsconfig: "./tsconfig.json",
   onSuccess: async () => {
-    // Copy handlebars templates
-    const templateFiles = glob.sync('src/views/**/*.hbs');
-    for (const file of templateFiles) {
-      log(`Copying template: ${file}`);
-      const destPath = file.replace('src/', 'dist/src/');
-      await mkdir(join(process.cwd(), destPath, '..'), { recursive: true });
-      await copyFile(file, destPath);
-    }
+    // // Copy handlebars templates
+    // const templateFiles = glob.sync('src/views/**/*.hbs');
+    // for (const file of templateFiles) {
+    //   log(`Copying template: ${file}`);
+    //   const destPath = file.replace('src/', 'dist/src/');
+    //   await mkdir(join(process.cwd(), destPath, '..'), { recursive: true });
+    //   await copyFile(file, destPath);
+    // }
   }
 }));
