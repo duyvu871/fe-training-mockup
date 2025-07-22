@@ -36,7 +36,7 @@ app.set('trust proxy', 1); // Trust first proxy for secure headers
 app.use(securityHeaders);
 
 // CORS configuration
-app.use(corsConfig);
+// app.use(corsConfig);
 
 // Rate limiting
 app.use(generalRateLimit);
