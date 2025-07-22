@@ -1,6 +1,8 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 import path from 'path';
+import cors from 'cors';
+
 import { config } from './config/environment';
 import { logger } from './utils/logger';
 import { disconnectDatabase } from './utils/database-health';
@@ -37,7 +39,9 @@ app.use(securityHeaders);
 
 // CORS configuration
 // app.use(corsConfig);
-
+app.use(cors({
+  origin: "*"
+}));
 // Rate limiting
 app.use(generalRateLimit);
 
