@@ -1,4 +1,5 @@
 {
+
   "openapi": "3.0.0",
   "info": {
     "title": "Tên API của bạn",
@@ -11,7 +12,7 @@
   },
   "servers": [
     {
-      "url": "https://fe-api-training.ssit.company",
+      "url": "/",
       "description": "Server testing"
     }
   ],
