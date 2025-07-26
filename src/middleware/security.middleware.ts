@@ -72,7 +72,7 @@ export const corsConfig = cors({
  * General rate limiting
  */
 export const generalRateLimit = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 10 * 60 * 1000, // 10 minutes
   max: 1000, // Limit each IP to 1000 requests per windowMs
   message: {
     error: true,
@@ -103,11 +103,11 @@ export const generalRateLimit = rateLimit({
  * Strict rate limiting for auth endpoints
  */
 export const authRateLimit = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 auth requests per windowMs
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 1000, // Limit each IP to 1000 auth requests per windowMs
   message: {
     error: true,
-    message: 'Quá nhiều lần đăng nhập thất bại, vui lòng thử lại sau 15 phút',
+    message: 'Quá nhiều lần đăng nhập thất bại, vui lòng thử lại sau 10 phút',
     code: 'AUTH_RATE_LIMIT_EXCEEDED'
   },
   standardHeaders: true,
@@ -136,7 +136,7 @@ export const authRateLimit = rateLimit({
  */
 export const apiRateLimit = rateLimit({
   windowMs: 60 * 1000, // 1 minute
-  max: 100, // Limit each IP to 100 API requests per minute
+  max: 1000, // Limit each IP to 1000 API requests per minute
   message: {
     error: true,
     message: 'Quá nhiều yêu cầu API, vui lòng thử lại sau',
