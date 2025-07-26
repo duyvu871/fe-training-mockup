@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "fe-api-training.ssit.company",
+      "url": "https://fe-api-training.ssit.company",
       "description": "Server testing"
     }
   ],
