@@ -35,7 +35,7 @@ export class OrderController {
    */
   async getOrders(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { page = 1, limit = 10, status, userId, startDate, endDate, sortBy, sortOrder } = req.query;
+      const { page = 1, limit = 10, status, userId, dateFrom, dateTo, sortBy, sortOrder } = req.query;
 
       // Validate pagination
       const { validatedPage, validatedLimit } = validatePaginationParams(
@@ -50,8 +50,8 @@ export class OrderController {
 
       if (status) options.status = status as OrderStatus;
       if (userId) options.userId = userId as string;
-      if (startDate) options.dateFrom = new Date(startDate as string);
-      if (endDate) options.dateTo = new Date(endDate as string);
+      if (dateFrom) options.dateFrom = new Date(dateFrom as string);
+      if (dateTo) options.dateTo = new Date(dateTo as string);
       if (sortBy) options.sortBy = sortBy as 'createdAt' | 'total' | 'status';
       if (sortOrder) options.sortOrder = sortOrder as 'asc' | 'desc';
 
