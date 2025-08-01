@@ -90,19 +90,20 @@
 | Request URL | `/api/orders` |
 | Request Method | GET |
 | Request Header | Authorization: Bearer {access_token} |
-| Query params | page, limit, search, status, paymentMethod, startDate, endDate |
+| Query params | page, limit, status, userId, startDate, endDate, sortBy, sortOrder |
 
 ### 2.2 Tham số query
 
 | **Tên trường** | **Kiểu dữ liệu** | **Mặc định** | **Bắt buộc** | **Ghi chú** |
 |----------------|------------------|--------------|--------------|-------------|
 | page | Số nguyên | 1 | | Trang hiện tại (>= 1) |
-| limit | Số nguyên | 20 | | Số items mỗi trang (1-100) |
-| search | Chuỗi ký tự | - | | Tìm kiếm theo orderNumber hoặc customerName |
+| limit | Số nguyên | 10 | | Số items mỗi trang (1-100) |
 | status | Chuỗi | - | | Lọc theo trạng thái: PENDING, COMPLETED, CANCELLED, REFUNDED |
-| paymentMethod | Chuỗi | - | | Lọc theo phương thức thanh toán: CASH, CARD, TRANSFER |
+| userId | UUID | - | | Lọc theo ID người dùng |
 | startDate | Ngày | - | | Từ ngày (YYYY-MM-DD) |
 | endDate | Ngày | - | | Đến ngày (YYYY-MM-DD) |
+| sortBy | Chuỗi | - | | Sắp xếp theo: createdAt, total, status |
+| sortOrder | Chuỗi | - | | Thứ tự sắp xếp: asc, desc |
 
 ### 2.3 Dữ liệu đầu ra
 

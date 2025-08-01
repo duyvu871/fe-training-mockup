@@ -50,8 +50,8 @@ export class OrderController {
 
       if (status) options.status = status as OrderStatus;
       if (userId) options.userId = userId as string;
-      if (startDate) options.startDate = new Date(startDate as string);
-      if (endDate) options.endDate = new Date(endDate as string);
+      if (startDate) options.dateFrom = new Date(startDate as string);
+      if (endDate) options.dateTo = new Date(endDate as string);
       if (sortBy) options.sortBy = sortBy as 'createdAt' | 'total' | 'status';
       if (sortOrder) options.sortOrder = sortOrder as 'asc' | 'desc';
 
