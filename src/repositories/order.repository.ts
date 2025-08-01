@@ -19,6 +19,8 @@ export class OrderRepository {
         paymentMethod: PaymentMethod;
         notes?: string;
         discount?: number;
+        customerName?: string;
+        customerPhone?: string;
     }): Promise<Order & { orderItems: (OrderItem & { product: Product })[] }> {
         try {
             // Calculate totals
@@ -38,6 +40,8 @@ export class OrderRepository {
                     tax,
                     discount,
                     total,
+                    customerName: data.customerName || null,
+                    customerPhone: data.customerPhone || null,
                     paymentMethod: data.paymentMethod,
                     status: ORDER_STATUS.PENDING,
                     notes: data.notes || null,
